@@ -33,21 +33,21 @@ public class BandaController {
     @PostMapping("/crear")
     public ResponseEntity<?> crearBanda(@RequestBody Banda banda, @RequestParam Long idUsuario) {
 
-        // 1. Buscamos al usuario que quiere crear la banda
+        // Buscamos al usuario que quiere crear la banda
         Usuario creador = usuarioRepository.findById(idUsuario).orElse(null);
 
         if (creador == null) {
             return ResponseEntity.badRequest().body("Error: Usuario no encontrado.");
         }
         // Forzamos el ID a null antes de guardar.
-        // Esto le dice a Hibernate: "Crea uno nuevo, no busques el ID 0".
+        // Seteamos el id a null para generar uno nuevo
         banda.setId(null); 
         // -------------------------------
 
-        // 2. Asignamos el creador a la banda
+        //  Asignamos el creador a la banda (relacion)
         banda.setCreador(creador);
 
-        // 3. Guardamos la banda en la BD
+        //  Guardamos la banda en la BD
         Banda nuevaBanda = bandaRepository.save(banda);
 
         return ResponseEntity.ok(nuevaBanda);

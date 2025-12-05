@@ -22,7 +22,7 @@ public class Usuario {
     private String email;
     
     @Column(nullable = false)
-   @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+   @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // Seguridad JSON
     private String password;
 
     private String telefono;

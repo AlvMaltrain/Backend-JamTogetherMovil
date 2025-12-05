@@ -35,7 +35,7 @@ public class UsuarioController {
     //URL: /api/usuarios/registro
     @PostMapping("/registro")
     public ResponseEntity<?> registrar(@RequestBody Usuario usuario) {
-        //Verificamos si el email ya está registrado
+        //Verificamos si el email ya esta registrado
         if (usuarioRepository.findByEmail(usuario.getEmail()) != null) {
             return ResponseEntity.badRequest().body("Error: El email ya está registrado.");
         }
@@ -59,7 +59,7 @@ public class UsuarioController {
         );
 
         if (usuario != null) {
-            //Exitoso, devolvemos todo el objeto
+            //Exitoso, devolvemos el objeto
             return ResponseEntity.ok(usuario);
         }else{
             return ResponseEntity.status(401).body("Error: Credenciales incorrectas.");
@@ -79,7 +79,7 @@ public class UsuarioController {
         }
 
         //Acualizamos SOLO los datos artisticos (sin tocar email y password)
-        //Verificamos que no sean nulos para no borrar info por error
+        //Verificamos que no sean nulos
         if (datosNuevos.getInstrumento() != null)
             usuarioExistente.setNombreArtistico(datosNuevos.getNombreArtistico());
 
